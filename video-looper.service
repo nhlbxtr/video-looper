@@ -1,0 +1,27 @@
+[Unit]
+Description=Video Loop Player
+After=multi-user.target
+ConditionPathExistsGlob=|/home/tv/videos/*.mov
+ConditionPathExistsGlob=|/home/tv/videos/*.mp4
+PartOf=work-hours.target
+
+[Service]
+User=tv
+WorkingDirectory=/home/tv/videos
+
+PAMName=login                      # erzeugt eine logind-Session für den User
+StandardInput=tty
+StandardOutput=tty
+TTYPath=/dev/tty1
+TTYReset=yes
+TTYVHangup=yes
+TTYVTDisallocate=yes
+
+PermissionsStartOnly=yes
+ExecStartPre=/usr/bin/chvt 1
+ExecStart=/bin/sh -c 'exec /usr/bin/mpv --no-audio --fs --loop-playlist=inf --no-osd-bar --no-terminal --gpu-context=drm --drm-mode=preferred *'
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=work-hours.target
