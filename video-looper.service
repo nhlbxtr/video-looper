@@ -1,9 +1,10 @@
+#sudo usermod -aG video,render "$USER"
 [Unit]
 Description=Video Loop Player
 After=multi-user.target
-ConditionPathExistsGlob=|/home/tv/videos/*.mov
-ConditionPathExistsGlob=|/home/tv/videos/*.mp4
-PartOf=work-hours.target
+#ConditionPathExistsGlob=|/home/tv/videos/*.mov
+#ConditionPathExistsGlob=|/home/tv/videos/*.mp4
+#PartOf=work-hours.target
 
 [Service]
 User=tv
